@@ -1,0 +1,34 @@
+{{define "creategametype"}}
+
+    <!DOCTYPE html>
+    <html lang="en">
+    {{template "header"}}
+    <body>
+    {{template "navbar"}}
+    <div class="container">
+        <form class="form-horizontal" action='/game/create' method="POST" enctype="application/x-www-form-urlencoded">
+            <fieldset>
+                <div id="legend">
+                    <legend class="">Create game type</legend>
+                </div>
+                <div class="control-group">
+                    <!-- Name -->
+                    <label class="control-label" for="name">Name</label>
+                    <div class="controls">
+                        <input type="text" id="name" name="name" placeholder="" class="input-xlarge">
+                        <p class="help-block">Please specify game type name</p>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <!-- Button -->
+                    <div class="controls">
+                        <button class="btn btn-success">Login</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+    {{template "footer"}}
+    </body>
+    </html>
+{{end}}
