@@ -87,3 +87,10 @@ fabric.properties
 # vendor/
 
 .env
+.idea/$PRODUCT_WORKSPACE_FILE$
+.idea/.gitignore
+.idea/git_toolbox_prj.xml
+.idea/judge.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
