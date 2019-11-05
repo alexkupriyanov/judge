@@ -1,0 +1,39 @@
+{{define "getMatch"}}
+
+    <!DOCTYPE html>
+    <html lang="en">
+    {{template "header"}}
+    <body>
+    {{template "navbar"}}
+    <div class="container">
+        <h1>Матч {{.Team1.Name}} против {{.Team2.Name}}</h1>
+        <div class="row">
+            <a class="btn btn-primary" href="/match/{{.Id}}/event" role="button">Добавить событие</a>
+        </div>
+        <h3>Игроки команды 1:</h3>
+        <ul>
+            {{range .Team1.Players}}
+            <li><b><a href="/player/{{.Id}}">{{ .Name }}</a></b></li>
+            {{end}}
+        </ul>
+        <h3>Игроки команды 2:</h3>
+        <ul>
+            {{range .Team2.Players}}
+                <li><b><a href="/player/{{.Id}}">{{ .Name }}</a></b></li>
+            {{end}}
+        </ul>
+        <h3>События в игре:</h3>
+        <ul>
+            {{range .Events}}
+                {{if eq .PlayerCount 1 }}
+                    <li>{{.EventType.Name}} : {{.Player1.Name}}</li>
+                {{else}}
+                    <li>{{.EventType.Name}} : {{.Player1.Name}} and {{.Player2.Name}}</li>
+                {{end}}
+            {{end}}
+        </ul>
+    </div>
+    {{template "footer"}}
+    </body>
+    </html>
+{{end}}

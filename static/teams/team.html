@@ -1,0 +1,21 @@
+{{define "team"}}
+
+    <!DOCTYPE html>
+    <html lang="en">
+    {{template "header"}}
+    <body>
+    {{template "navbar"}}
+    <div class="container">
+        <a class="btn btn-primary" href="/player/create/{{.Id}}" role="button">Добавить игрока</a>
+        <h3>Тип игры: </h3>{{.GameType.Name}}
+        <h3>Игроки:</h3>
+        <ul>
+            {{range .Players}}
+                <li><b><a href="/player/{{.Id}}">{{ .Name }}</a></b></li>
+            {{end}}
+        </ul>
+    </div>
+    {{template "footer"}}
+    </body>
+    </html>
+{{end}}

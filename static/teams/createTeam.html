@@ -1,0 +1,36 @@
+{{define "createteam"}}
+
+    <!DOCTYPE html>
+    <html lang="en">
+    {{template "header"}}
+    <body>
+    {{template "navbar"}}
+    <div class="container">
+        <h1>Создание новой команды</h1>
+        <form class="form-horizontal" action='/team/create/{{.}}' method="POST" enctype="application/x-www-form-urlencoded">
+            <fieldset>
+                <div id="legend">
+                    <legend class="">Create team</legend>
+                </div>
+                <div class="control-group">
+                    <!-- Name -->
+                    <label class="control-label" for="name">Name</label>
+                    <div class="controls">
+                        <input type="text" id="name" name="name" placeholder="" class="input-xlarge">
+                        <p class="help-block">Please specify team type name</p>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <!-- Button -->
+                    <div class="controls">
+                        <button class="btn btn-success">Login</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+
+    </div>
+    {{template "footer"}}
+    </body>
+    </html>
+{{end}}

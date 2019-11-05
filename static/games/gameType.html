@@ -1,0 +1,37 @@
+{{define "gametype"}}
+
+    <!DOCTYPE html>
+    <html lang="en">
+    {{template "header"}}
+    <body>
+    {{template "navbar"}}
+    <div class="container">
+        <h1>{{.Name}}</h1>
+        <div class="row">
+            <a class="btn btn-primary" href="/match/create/{{.Id}}" role="button">Создать новый протокол</a>
+            <a class="btn btn-primary" href="/game/{{.Id}}/event/create" role="button">Создать новое событие</a>
+            <a class="btn btn-primary" href="/team/create/{{.Id}}" role="button">Добавить команду</a>
+        </div>
+        <h3>Команды:</h3>
+        <ul>
+            {{range .Teams}}
+                <li><b><a href="/team/{{.Id}}">{{ .Name }}</a></b></li>
+            {{end}}
+        </ul>
+        <h3>Прошедшие матчи:</h3>
+        <ul>
+            {{range .Matches}}
+                <li><b><a href="/match/{{.Id}}">{{ .Team1.Name }} : {{ .Team2.Name }}</a></b></li>
+            {{end}}
+        </ul>
+        <h3>Типы событий:</h3>
+        <ul>
+            {{range .Events}}
+                <li><b><a href="/event/{{.Id}}">{{.Name}}</a></b></li>
+            {{end}}
+        </ul>
+    </div>
+    {{template "footer"}}
+    </body>
+    </html>
+{{end}}

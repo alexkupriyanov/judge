@@ -36,7 +36,7 @@ func init() {
 		log.Fatal(err)
 		os.Exit(1)
 	}
-	db.Debug().AutoMigrate(&EventType{}, &Event{}, &Player{}, &Game{}, &GameType{}, &Team{}, &User{}, &Token{})
+	db.Debug().AutoMigrate(&EventType{}, &Event{}, &Player{}, &Match{}, &GameType{}, &Team{}, &User{}, &Token{})
 	//db.Debug().AutoMigrate(&models.Submission{}, &models.Task{}, &models.PrLang{}, &models.Checker{}, &models.Test{}, &models.Limits{})
 }
 

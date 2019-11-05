@@ -1,0 +1,63 @@
+{{define "createEvent"}}
+
+    <!DOCTYPE html>
+    <html lang="en">
+    {{template "header"}}
+    <body>
+    {{template "navbar"}}
+    <div class="container">
+        <h1>Событие в матче {{.Team1Name}} против {{.Team2Name}}</h1>
+        <form class="form-horizontal" action='/match/{{.MatchId}}/event/{{.EventId}}' method="POST" enctype="application/x-www-form-urlencoded">
+            <fieldset>
+                <div id="legend">
+                    <legend class="">Create event</legend>
+                </div>
+                <div class="control-group">
+                    <!-- Name -->
+                    {{if ne .PlayersCount 1}}
+                        <label class="control-label" for="player1">Игрок 1</label>
+                    <select id="player1" name="player1">
+                        {{range .Players}}
+                            <option value="{{.Id}}">{{.Name}} - {{.Team.Name}}</option>
+                        {{end}}
+                    </select>
+                        <p class="help-block">Пожалуйста, выберите игрока 1</p>
+                        <label class="control-label" for="player2">Игрок 2</label>
+                        <select id="player2" name="player2">
+                            {{range .Players}}
+                                <option value="{{.Id}}">{{.Name}} - {{.Team.Name}}</option>
+                            {{end}}
+                        </select>
+                        <p class="help-block">Пожалуйста, выберите игрока 2</p>
+                        {{else}}
+                        <label class="control-label" for="player1">Игрок</label>
+                        <select id="player1" name="player1">
+                            {{range .Players}}
+                                <option value="{{.Id}}">{{.Name}} - {{.Team.Name}}</option>
+                            {{end}}
+                        </select>
+                        <p class="help-block">Пожалуйста, выберите игрока</p>
+                    {{end}}
+                </div>
+                <div class="control-group">
+                    <input value="{{.PlayersCount}}" name="playersCount" id="playersCount" style="display: none">
+                </div>
+                <div class="control-group">
+                    <label class="control-label" for="timeBefore">Время от начала</label>
+                    <input name="timeBefore" id="timeBefore">
+                    <p class="help-block">Пожалуйста, укажите время от начала матча</p>
+                </div>
+                <div class="control-group">
+                    <!-- Button -->
+                    <div class="controls">
+                        <button class="btn btn-success">Login</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+
+    </div>
+    {{template "footer"}}
+    </body>
+    </html>
+{{end}}

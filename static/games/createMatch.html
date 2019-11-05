@@ -1,0 +1,46 @@
+{{define "createMatch"}}
+
+    <!DOCTYPE html>
+    <html lang="en">
+    {{template "header"}}
+    <body>
+    {{template "navbar"}}
+    <div class="container">
+        <h1>Создание матча</h1>
+        <form class="form-horizontal" action='/match/create/{{.GameTypeId}}' method="POST" enctype="application/x-www-form-urlencoded">
+            <fieldset>
+                <div id="legend">
+                    <legend class="">Create match</legend>
+                </div>
+                <div class="control-group">
+                    <!-- Team1 -->
+                    <label class="control-label" for="Team1">Team 1</label>
+                    <select id="Team1" name="Team1">
+                        {{range .Teams}}
+                            <option value="{{.Id}}">{{.Name}}</option>
+                        {{end}}
+                    </select>
+                </div>
+                <div class="control-group">
+                    <!-- Team2 -->
+                    <label class="control-label" for="Team2">Team 2</label>
+                    <select id="Team2" name="Team2">
+                        {{range .Teams}}
+                            <option value="{{.Id}}">{{.Name}}</option>
+                        {{end}}
+                    </select>
+                </div>
+                <div class="control-group">
+                    <!-- Button -->
+                    <div class="controls">
+                        <button class="btn btn-success">Login</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+
+    </div>
+    {{template "footer"}}
+    </body>
+    </html>
+{{end}}

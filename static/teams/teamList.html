@@ -1,0 +1,19 @@
+{{define "teamList"}}
+
+    <!DOCTYPE html>
+    <html lang="en">
+    {{template "header"}}
+    <body>
+    {{template "navbar"}}
+    <div class="container">
+        <a class="btn btn-primary" href="/team/create/{{.}}" role="button">Создать новую команду</a>
+        <ul>
+            {{range .}}
+                <li><b><a href="/game/{{.Id}}">{{ .Name }}</a></b></li>
+            {{end}}
+        </ul>
+    </div>
+    {{template "footer"}}
+    </body>
+    </html>
+{{end}}

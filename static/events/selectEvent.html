@@ -1,0 +1,42 @@
+{{define "selectEvent"}}
+
+    <!DOCTYPE html>
+    <html lang="en">
+    {{template "header"}}
+    <body>
+    {{template "navbar"}}
+    <div class="container">
+        <h1>Событие в матче {{.Team1Name}} против {{.Team2Name}}</h1>
+        <form class="form-horizontal" action='/match/{{.MatchId}}/event' method="POST" enctype="application/x-www-form-urlencoded">
+            <fieldset>
+                <div id="legend">
+                    <legend class="">Create event</legend>
+                </div>
+                <div class="control-group">
+                    <!-- Name -->
+                    <label class="control-label" for="eventType">Тип события</label>
+                    <select id="eventType" name="eventType">
+                        {{range .EventTypes}}
+                            {{if eq .PlayerCount 1}}
+                                <option value="{{.Id}}">{{.Name}} (для одного игрока)</option>
+                            {{else}}
+                                <option value="{{.Id}}">{{.Name}} (для двух игроков)</option>
+                            {{end}}
+                        {{end}}
+                    </select>
+                    <p class="help-block">Пожалуйста, выберите вид события</p>
+                <div class="control-group">
+                    <!-- Button -->
+                    <div class="controls">
+                        <button class="btn btn-success">Login</button>
+                    </div>
+                </div>
+                </div>
+            </fieldset>
+        </form>
+
+    </div>
+    {{template "footer"}}
+    </body>
+    </html>
+{{end}}

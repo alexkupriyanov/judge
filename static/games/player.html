@@ -1,0 +1,15 @@
+{{define "player"}}
+
+    <!DOCTYPE html>
+    <html lang="en">
+    {{template "header"}}
+    <body>
+    {{template "navbar"}}
+    <div class="container">
+        <h3>Игрок:</h3>{{.Name}}
+        <h3>Команда: </h3><b><a href="/team/{{.Team.Id}}">{{.Team.Name}}</a></b>
+    </div>
+    {{template "footer"}}
+    </body>
+    </html>
+{{end}}
