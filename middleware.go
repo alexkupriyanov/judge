@@ -14,7 +14,7 @@ import (
 
 var (
 	// key must be 16, 24 or 32 bytes long (AES-128, AES-192 or AES-256)
-	key = os.Getenv("Secret")
+	key   = os.Getenv("Secret")
 	store = sessions.NewCookieStore([]byte(key))
 )
 
@@ -35,9 +35,9 @@ var Authentication = func(next http.Handler) http.Handler {
 
 		log.Printf("Requested by user %d", token.UserId)
 		if token.ExpiredAt.UTC().Unix() < time.Now().UTC().Unix() {
-				log.Printf("Token for user %s is expired ", token.User.Name)
-				util.ThrowError(errors.New("Expired token"), http.StatusUnauthorized, w)
-				return
+			log.Printf("Token for user %s is expired ", token.User.Name)
+			util.ThrowError(errors.New("Expired token"), http.StatusUnauthorized, w)
+			return
 		}
 		ctx := context.WithValue(r.Context(), "UserId", token.UserId)
 		ctx = context.WithValue(ctx, "Token", token.Token)

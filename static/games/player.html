@@ -8,6 +8,12 @@
     <div class="container">
         <h3>Игрок:</h3>{{.Name}}
         <h3>Команда: </h3><b><a href="/team/{{.Team.Id}}">{{.Team.Name}}</a></b>
+        <h3>Статистика игрока:</h3>
+        <ul>
+            {{range .Statistics}}
+                <li>{{.EventType.Name}} : {{.Value}} раз</li>
+            {{end}}
+        </ul>
     </div>
     {{template "footer"}}
     </body>

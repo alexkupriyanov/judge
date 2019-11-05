@@ -7,9 +7,10 @@ import (
 	"net/http"
 	"os"
 )
+
 var (
 	// key must be 16, 24 or 32 bytes long (AES-128, AES-192 or AES-256)
-	key = os.Getenv("Secret")
+	key   = os.Getenv("Secret")
 	store = sessions.NewCookieStore([]byte(key))
 )
 
@@ -22,7 +23,7 @@ var RegisterPost = func(w http.ResponseWriter, r *http.Request) {
 	login := r.Form.Get("email")
 	password := r.Form.Get("password")
 	name := r.Form.Get("username")
-	res, err := Models.NewUser(login,password, name)
+	res, err := Models.NewUser(login, password, name)
 	if err != nil {
 		util.ThrowError(err, http.StatusBadRequest, w)
 		return
@@ -33,7 +34,7 @@ var RegisterPost = func(w http.ResponseWriter, r *http.Request) {
 	return
 }
 
-var Login  = func(w http.ResponseWriter, r *http.Request) {
+var Login = func(w http.ResponseWriter, r *http.Request) {
 	_ = rnd.HTML(w, http.StatusOK, "login", nil)
 }
 var LoginPost = func(w http.ResponseWriter, r *http.Request) {
@@ -51,4 +52,3 @@ var LoginPost = func(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w, r, "/", http.StatusFound)
 	return
 }
-

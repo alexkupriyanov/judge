@@ -6,6 +6,7 @@ import (
 )
 
 var rnd *renderer.Render
+
 func init() {
 	opts := renderer.Options{
 		ParseGlobPattern: "./static/*.html",

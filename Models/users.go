@@ -10,11 +10,11 @@ import (
 )
 
 type User struct {
-	Id   		uint
-	Login 		string
-	Password	string
-	Name		string
-	LastAction	time.Time
+	Id         uint
+	Login      string
+	Password   string
+	Name       string
+	LastAction time.Time
 }
 
 type Token struct {
@@ -38,7 +38,7 @@ func NewUser(login string, password string, name string) (Token, error) {
 		return Token{}, err
 	}
 	user.Password = ""
-	token, _ := Login(login,password)
+	token, _ := Login(login, password)
 	return token, nil
 }
 

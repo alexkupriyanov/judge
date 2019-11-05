@@ -6,10 +6,11 @@ import (
 )
 
 type Player struct {
-	Id     uint
-	Name   string
-	TeamId uint
-	Team   Team
+	Id         uint
+	Name       string
+	TeamId     uint
+	Team       Team
+	Statistics []Statistic
 }
 
 type Team struct {
@@ -19,6 +20,11 @@ type Team struct {
 	GameType   GameType
 	Matches    []Match
 	GameTypeId uint
+}
+
+type Statistic struct {
+	EventType EventType
+	Value     int
 }
 
 func CreateTeam(name string, gameTypeId uint) (Team, error) {
@@ -60,5 +66,28 @@ func GetPlayer(playerId uint) (Player, error) {
 	if err != nil {
 		return Player{}, err
 	}
+	var eventTypes []EventType
+	err = GetDB().Where(&EventType{GameTypeId: player.Team.GameTypeId}).Find(&eventTypes).Error
+	if err != nil {
+		return player, nil
+	}
+	for _, eventType := range eventTypes {
+		player.AddStatistic(eventType.Name)
+	}
 	return player, err
+}
+
+func (player *Player) AddStatistic(eventTypeName string) {
+	var eventType EventType
+	err := GetDB().Where(EventType{Name: eventTypeName}).First(&eventType).Error
+	if err != nil {
+		return
+	}
+	var events []Event
+	var eventCount int
+	err = GetDB().Preload("EventType").Where(&Event{EventTypeId: eventType.Id, Player1Id: player.Id}).Find(&events).Count(&eventCount).Error
+	if err != nil || eventCount == 0 {
+		return
+	}
+	player.Statistics = append(player.Statistics, Statistic{EventType: eventType, Value: eventCount})
 }
