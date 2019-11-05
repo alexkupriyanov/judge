@@ -3,9 +3,7 @@ package main
 import (
 	"context"
 	"github.com/gorilla/sessions"
-	"github.com/pkg/errors"
 	"judge/Models"
-	"judge/util"
 	"log"
 	"net/http"
 	"os"
@@ -29,14 +27,14 @@ var Authentication = func(next http.Handler) http.Handler {
 		err := Models.GetDB().Where(Models.Token{Token: tokenPart}).First(&token).Error
 		if err != nil {
 			log.Println(err) //Malformed token, returns with http code 403 as usual
-			util.ThrowError(errors.New("Malformed authentication token"), http.StatusUnauthorized, w)
+			http.Redirect(w, r, "/login", http.StatusFound)
 			return
 		}
 
 		log.Printf("Requested by user %d", token.UserId)
 		if token.ExpiredAt.UTC().Unix() < time.Now().UTC().Unix() {
 			log.Printf("Token for user %s is expired ", token.User.Name)
-			util.ThrowError(errors.New("Expired token"), http.StatusUnauthorized, w)
+			http.Redirect(w, r, "/login", http.StatusFound)
 			return
 		}
 		ctx := context.WithValue(r.Context(), "UserId", token.UserId)
